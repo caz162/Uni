@@ -14,7 +14,8 @@ myform = form.Form(
         form.Validator('Must be more than 5', lambda x:int(x)>5)),
     form.Textarea('occupation'),
     form.Checkbox('dead'), 
-    form.Dropdown('french', ['mustard', 'fries', 'wine']),
+    form.Dropdown('difficulty', ['All_Mountain', 'All_Mountain_Plus', 'XC']),
+    form.Dropdown('terrain', ['Rock', 'Grass', 'Road']),
     form.Textbox("name2"))
 
 class index: 
@@ -31,7 +32,7 @@ class index:
         else:
             # form.d.boe and form['boe'].value are equivalent ways of
             # extracting the validated arguments from the form.
-            return "Grrreat success! boe: %s, bax: %s, french: %s" % (form.d.name, form['id'].value, form.d.french)
+            return "Grrreat success! boe: %s, bax: %s, french: %s, dead: %s" % (form.d.name, form['id'].value, form.d.terrain, form.d.dead)
 
 if __name__=="__main__":
     web.internalerror = web.debugerror
