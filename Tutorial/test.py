@@ -1,5 +1,6 @@
-import web
+import web, os
 from web import form
+
 
 render = web.template.render('templates/')
 
@@ -8,15 +9,12 @@ app = web.application(urls, globals())
 
 myform = form.Form( 
     form.Textbox("name"), 
-    form.Textbox("id", 
-        form.notnull,
-        form.regexp('\d+', 'Must be a digit'),
-        form.Validator('Must be more than 5', lambda x:int(x)>5)),
-    form.Textarea('occupation'),
-    form.Checkbox('dead'), 
+    form.Textarea('description'),
+    form.Checkbox('pref1',value="some value"),
+    form.Checkbox('pref2',value="some value"),
+    form.Checkbox('pref3',value="some value"), 
     form.Dropdown('difficulty', ['All_Mountain', 'All_Mountain_Plus', 'XC']),
-    form.Dropdown('terrain', ['Rock', 'Grass', 'Road']),
-    form.Textbox("name2"))
+    form.Dropdown('terrain', ['Rock', 'Grass', 'Road']))
 
 class index: 
     def GET(self): 
@@ -30,9 +28,10 @@ class index:
         if not form.validates(): 
             return render.formtest(form)
         else:
+            os.system("dir")
             # form.d.boe and form['boe'].value are equivalent ways of
             # extracting the validated arguments from the form.
-            return "Grrreat success! boe: %s, bax: %s, french: %s, dead: %s" % (form.d.name, form['id'].value, form.d.terrain, form.d.dead)
+            return "Worked name: %s, pref1: %s, pref2: %s, pref3: %s, difficulty: %s, terrain: %s" % (form.d.name,form['pref1'].checked,form['pref2'].checked,form['pref3'].checked, form['difficulty'].value, form.d.terrain)
 
 if __name__=="__main__":
     web.internalerror = web.debugerror
