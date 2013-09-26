@@ -21,6 +21,7 @@ class index:
         form = myform()
         # make sure you create a copy of the form by calling it (line above)
         # Otherwise changes will appear globally
+        print "hello"
         return render.formtest(form)
 
     def POST(self): 
@@ -28,7 +29,6 @@ class index:
         if not form.validates(): 
             return render.formtest(form)
         else:
-            os.system("dir")
             # form.d.boe and form['boe'].value are equivalent ways of
             # extracting the validated arguments from the form.
             return "Worked name: %s, pref1: %s, pref2: %s, pref3: %s, difficulty: %s, terrain: %s" % (form.d.name,form['pref1'].checked,form['pref2'].checked,form['pref3'].checked, form['difficulty'].value, form.d.terrain)
